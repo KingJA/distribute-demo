@@ -11,13 +11,16 @@ import org.springframework.data.redis.core.types.Expiration;
 import java.util.Arrays;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Description:TODO
  * Create Time:2020/9/18 0018 下午 5:02
  * Author:KingJA
  * Email:kingjavip@gmail.com
  */
-public class RedisLock {
+@Slf4j
+public class RedisLock implements AutoCloseable {
 
     private RedisTemplate redisTemplate;
     private String key;
@@ -47,7 +50,7 @@ public class RedisLock {
                 return result;
             }
         };
-        return  (Boolean) redisTemplate.execute(redisCallback);
+        return (Boolean) redisTemplate.execute(redisCallback);
     }
 
     public boolean unlock() {
@@ -59,6 +62,13 @@ public class RedisLock {
                 "end";
         RedisScript redisScript = RedisScript.of(script, Boolean.class);
         List<String> keys = Arrays.asList(key);
-        return (Boolean) redisTemplate.execute(redisScript, keys, value);
+        Boolean unlockResult = (Boolean) redisTemplate.execute(redisScript, keys, value);
+        log.info("释放锁的结果：" + unlockResult);
+        return unlockResult;
+    }
+
+    @Override
+    public void close() throws Exception {
+        unlock();
     }
 }

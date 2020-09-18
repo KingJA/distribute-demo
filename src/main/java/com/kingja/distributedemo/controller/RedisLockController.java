@@ -57,7 +57,7 @@ public class RedisLockController {
             }finally {
                 //释放redis锁
                 boolean unlockResult = redisLock.unlock();
-                log.info("释放锁的结果："+unlockResult);
+
             }
         }
         log.info("方法执行完成");
