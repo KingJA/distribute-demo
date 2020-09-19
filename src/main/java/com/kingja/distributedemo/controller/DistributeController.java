@@ -4,7 +4,6 @@ import com.kingja.distributedemo.dao.DistributeLockMapper;
 import com.kingja.distributedemo.model.DistributeLock;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
