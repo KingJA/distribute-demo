@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.types.Expiration;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +32,7 @@ public class RedisLock implements AutoCloseable {
         this.redisTemplate = redisTemplate;
         this.key = key;
         this.expirTime = expirTime;
+        this.value = UUID.randomUUID().toString();
     }
 
     public boolean lock() {
@@ -50,7 +52,9 @@ public class RedisLock implements AutoCloseable {
                 return result;
             }
         };
-        return (Boolean) redisTemplate.execute(redisCallback);
+        //获取分布式锁
+        Boolean lock = (Boolean)redisTemplate.execute(redisCallback);
+        return lock;
     }
 
     public boolean unlock() {
