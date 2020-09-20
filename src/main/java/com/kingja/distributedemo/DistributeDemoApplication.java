@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @MapperScan("com.kingja.distributedemo.dao")
-@EnableScheduling
+//@EnableScheduling
 public class DistributeDemoApplication {
 
     public static void main(String[] args) {

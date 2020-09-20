@@ -56,6 +56,18 @@
                 </exclusion>
             </exclusions>
         </dependency>
+<!--redisson-->
+<!--        <dependency>-->
+<!--            <groupId>org.redisson</groupId>-->
+<!--            <artifactId>redisson</artifactId>-->
+<!--            <version>3.13.4</version>-->
+<!--        </dependency>-->
+        <!--redisson starter-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.13.4</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

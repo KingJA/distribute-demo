@@ -60,10 +60,7 @@ public class RedisLock implements AutoCloseable {
     public boolean unlock() {
         //释放redis锁
         String script = "if redis.call(\"get\",KEYS[1]) == ARGV[1] then\n" +
-                "    return redis.call(\"del\",KEYS[1])\n" +
-                "else\n" +
-                "    return 0\n" +
-                "end";
+                "    return redis.call(\"del\",KEYS[1])\n" +"else\n" +"    return 0\n" +"end";
         RedisScript redisScript = RedisScript.of(script, Boolean.class);
         List<String> keys = Arrays.asList(key);
         Boolean unlockResult = (Boolean) redisTemplate.execute(redisScript, keys, value);
